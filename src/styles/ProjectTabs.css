@@ -1,0 +1,333 @@
+/* ProjectTabs — sistema de abas para a seção Projetos */
+
+.project-tabs {
+  margin-top: 2rem;
+}
+
+/* Barra horizontal de abas */
+.project-tabs-bar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  border-radius: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.4) transparent;
+}
+
+.project-tabs-bar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.project-tabs-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-tabs-bar::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 3px;
+}
+
+/* Aba individual */
+.project-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.85rem 1.4rem;
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+}
+
+.project-tab:hover {
+  color: #cbd5e1;
+  background: rgba(56, 189, 248, 0.06);
+}
+
+.project-tab.active {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.18);
+}
+
+.project-tab.active.tab-current {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.22);
+}
+
+/* Indicador inferior animado */
+.project-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.project-tab.active::after {
+  width: 60%;
+}
+
+.project-tab.active.tab-current::after {
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+}
+
+/* Dot pulsante na aba "Atual" */
+.tab-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.tab-status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.35);
+  animation: tab-status-pulse 1.8s ease-out infinite;
+}
+
+@keyframes tab-status-pulse {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.tab-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Painel do projeto ativo */
+.project-panel {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  animation: panel-enter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-panel.panel-current {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.05) 0%,
+    rgba(15, 23, 42, 0.55) 60%
+  );
+  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.08);
+}
+
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header do painel: badges + título */
+.panel-header {
+  margin-bottom: 1.5rem;
+}
+
+.panel-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.panel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.panel-badge.badge-current {
+  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  color: #0f172a;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+}
+
+.panel-badge.badge-academic {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.panel-badge.badge-partner {
+  background: rgba(148, 163, 184, 0.12);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.panel-badge.badge-period {
+  background: rgba(15, 23, 42, 0.6);
+  color: #94a3b8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Status dot dentro da badge "Atual" */
+.panel-badge .status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0f172a;
+  animation: panel-badge-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes panel-badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.panel-title {
+  color: #e2e8f0;
+  font-size: 1.7rem;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* Banner de liderança */
+.leadership-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(56, 189, 248, 0.05));
+  border-left: 3px solid #38bdf8;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.panel-current .leadership-banner {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0.04));
+  border-left-color: #10b981;
+}
+
+.leadership-banner strong {
+  color: #38bdf8;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.panel-current .leadership-banner strong {
+  color: #10b981;
+}
+
+.leadership-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* Meta do painel */
+.panel-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 10px;
+  border: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.panel-meta .meta-item {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.panel-meta .meta-item strong {
+  color: #cbd5e1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .project-tabs-bar {
+    padding: 0.4rem;
+    gap: 0.35rem;
+    border-radius: 14px;
+    /* permitir scroll horizontal natural */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .project-tab {
+    padding: 0.7rem 1rem;
+    font-size: 0.88rem;
+  }
+
+  .project-panel {
+    padding: 1.75rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .panel-title {
+    font-size: 1.35rem;
+  }
+
+  .panel-meta {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .panel-badges {
+    gap: 0.4rem;
+  }
+
+  .panel-badge {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-tab {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .project-panel {
+    padding: 1.5rem 1rem;
+  }
+
+  .panel-title {
+    font-size: 1.2rem;
+  }
+}
