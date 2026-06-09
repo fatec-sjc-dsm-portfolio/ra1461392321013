@@ -21,7 +21,7 @@ const ContentWrapper = styled.div`
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <AppContainer>
         <Header />
         <ContentWrapper>
