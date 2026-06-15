@@ -40,6 +40,9 @@ jobs:
       - name: SPA fallback (copy index.html to 404.html)
         run: cp build/index.html build/404.html
 
+      - name: Disable Jekyll processing
+        run: touch build/.nojekyll
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
