@@ -84,6 +84,70 @@ export const professionalProjects: Project[] = [
 
 export const academicProjects: Project[] = [
   {
+    id: 'asg-rural',
+    tabLabel: 'Sistema ASG',
+    title: 'Sistema ASG – Análise Territorial de Propriedades Rurais',
+    badges: [
+      { kind: 'academic', label: 'Projeto Acadêmico' },
+      { kind: 'partner', label: 'Parceria FATEC' },
+      { kind: 'period', label: '2026.01' },
+    ],
+    meta: [
+      { label: 'Semestre', value: '6º – 2026.01' },
+      { label: 'Parceiro', value: 'Governo do Estado de São Paulo' },
+      { label: 'Equipe', value: 'Interrogação' },
+      { label: 'Status', value: 'Concluído' },
+    ],
+    context:
+      'Plataforma inteligente de análise territorial que integra dados geoespaciais públicos ' +
+      '(SICAR, INPE, ICMBio, FUNAI, INCRA, FCP) para apoiar fiscalização e análise de risco ' +
+      'ambiental, social e de governança (ASG) em propriedades rurais. O sistema oferece ' +
+      'cruzamento automatizado de informações, mapa interativo e consultas em linguagem natural.',
+    sections: [
+      {
+        title: 'Atuação',
+        paragraph:
+          'Atuei como desenvolvedor full-stack em uma arquitetura de microsserviços, ' +
+          'contribuindo tanto na camada de back-end (Python/FastAPI com PostGIS para operações ' +
+          'geoespaciais) quanto no front-end (React + TypeScript + Vite com mapa interativo). ' +
+          'Participei da estruturação dos serviços, da integração com fontes de dados públicas e ' +
+          'da implementação de funcionalidades transversais ao sistema.',
+      },
+      {
+        title: 'Funcionalidades entregues',
+        bullets: [
+          <>Busca de propriedades por <strong>código CAR</strong> com visualização de polígonos em mapa</>,
+          <>Análise de indicadores ASG com rastreabilidade das fontes oficiais</>,
+          <>Cruzamento com alertas de desmatamento (INPE) e sobreposição com áreas protegidas</>,
+          <>Chatbot com <strong>linguagem natural</strong> para consultas sobre propriedades</>,
+          <>Painel administrativo para atualização inteligente das bases</>,
+          <>Relatórios consolidados compatíveis com <strong>OGC/QGIS</strong></>,
+        ],
+      },
+      {
+        title: 'Arquitetura',
+        paragraph:
+          'Quatro microsserviços independentes (ingestão de dados, cruzamento ASG, busca ' +
+          'semântica e gerenciamento do banco) orquestrados via Docker Compose, com Nginx como ' +
+          'gateway. Banco PostgreSQL com extensão PostGIS para consultas geoespaciais.',
+      },
+    ],
+    tech: [
+      'Python',
+      'FastAPI',
+      'SQLAlchemy',
+      'PostgreSQL',
+      'PostGIS',
+      'React',
+      'TypeScript',
+      'Vite',
+      'Docker',
+      'Nginx',
+      'Google Maps',
+    ],
+    repoUrl: 'https://github.com/Equipe-Interrogacao',
+  },
+  {
     id: 'controle-militar',
     tabLabel: 'Controle Operacional Militar',
     title: 'Aplicativo Mobile para Controle Operacional Militar',
