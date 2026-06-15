@@ -5,8 +5,18 @@ import { FaChevronDown } from 'react-icons/fa';
 import ProjectTabs from '../components/ProjectTabs';
 import { professionalProjects, academicProjects } from '../data/projects';
 
+type ProjectCategory = 'academic' | 'professional' | 'personal';
+
 const Home: React.FC = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('academic');
+
+  const categorySubtitle =
+    activeCategory === 'academic'
+      ? 'Projetos desenvolvidos em parceria com instituições durante o curso de DSM na FATEC SJC.'
+      : activeCategory === 'professional'
+      ? 'Atuação atual na empresa da qual sou sócio.'
+      : 'Um pouco do que me move além do trabalho — interesses, hobbies e curiosidades.';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,24 +50,26 @@ const Home: React.FC = () => {
               <span className="gradient-text">Diogo Palharini</span>
             </h1>
             <p className="hero-subtitle">
-              Construindo produtos digitais — do código à estratégia
+              
             </p>
             <p className="hero-description">
-              Sou <strong>desenvolvedor full-stack</strong>, <strong>Product Owner técnico</strong> e
-              <strong> sócio</strong> de uma empresa de tecnologia. Atuo onde produto, código e
-              negócio se encontram — escrevendo software, estruturando sistemas e participando
-              das decisões que dão direção ao que entregamos.
+              Sou <strong>desenvolvedor full-stack</strong> é onde tudo começou e onde me sinto
+              em casa. Gosto de construir, entender como as coisas funcionam por dentro e ver
+              ideia virando produto. Também atuo como Product Owner e sou sócio de uma empresa
+              de tecnologia, mas é da mão na massa que vem a maior parte do que sei.
             </p>
             <p className="hero-description">
-              Meu foco atual é a <strong>Integra Rural</strong>, plataforma voltada ao agronegócio.
-              Lidero o produto, defino a arquitetura técnica e conecto a visão estratégica ao
-              desenvolvimento — circulando livremente entre os papéis conforme o momento pede.
+              Meu foco hoje é a <strong>Integra Rural</strong>, plataforma voltada ao agronegócio.
+              Participo de praticamente tudo por lá: do desenho do produto à construção do sistema,
+              das conversas com produtores até as decisões da empresa.
             </p>
             <p className="hero-description">
-              Estudo <strong>Desenvolvimento de Software Multiplataforma</strong> na FATEC São José
-              dos Campos. Em paralelo, construí experiência prática em projetos com Exército
-              Brasileiro, Tecsus, FAPG e outros parceiros — atuando ora como engenheiro, ora como
-              Product Owner, sempre na ponte entre tecnologia e negócio.
+              Sou formado em <strong>Desenvolvimento de Software Multiplataforma</strong> pela
+              FATEC São José dos Campos uma graduação ampla, que cobre desde desenvolvimento web e
+              mobile até gestão de projetos, dados, infraestrutura e arquitetura. Durante o curso,
+              ganhei vivência em parcerias com Exército Brasileiro, Tecsus, FAPG e outras
+              instituições, atuando ora como dev, ora como PO. Não gosto de me prender a um único
+              título: prefiro aprender, experimentar e seguir construindo.
             </p>
             <div className="hero-cta">
               <button
@@ -81,18 +93,87 @@ const Home: React.FC = () => {
             <span className="title-decoration">Projetos</span>
           </h2>
 
-          <div className="project-group">
-            <h3 className="project-group-title">Profissional</h3>
-            <p className="project-group-subtitle">Atuação atual na empresa da qual sou sócio.</p>
-            <ProjectTabs projects={professionalProjects} ariaLabel="Projetos profissionais" />
-          </div>
+          <div className="project-category-section">
+            <div
+              className="project-category-switch"
+              role="tablist"
+              aria-label="Categoria de projetos"
+            >
+              <button
+                role="tab"
+                type="button"
+                aria-selected={activeCategory === 'academic'}
+                className={`category-tab ${activeCategory === 'academic' ? 'active' : ''}`}
+                onClick={() => setActiveCategory('academic')}
+              >
+                Acadêmicos · APIs FATEC
+              </button>
+              <button
+                role="tab"
+                type="button"
+                aria-selected={activeCategory === 'professional'}
+                className={`category-tab ${activeCategory === 'professional' ? 'active' : ''}`}
+                onClick={() => setActiveCategory('professional')}
+              >
+                Profissional
+              </button>
+              <button
+                role="tab"
+                type="button"
+                aria-selected={activeCategory === 'personal'}
+                className={`category-tab ${activeCategory === 'personal' ? 'active' : ''}`}
+                onClick={() => setActiveCategory('personal')}
+              >
+                Pessoal
+              </button>
+            </div>
 
-          <div className="project-group">
-            <h3 className="project-group-title">Acadêmicos · APIs FATEC</h3>
-            <p className="project-group-subtitle">
-              Projetos desenvolvidos em parceria com instituições durante o curso de DSM na FATEC SJC.
-            </p>
-            <ProjectTabs projects={academicProjects} ariaLabel="Projetos acadêmicos da FATEC" />
+            <p className="project-category-subtitle">{categorySubtitle}</p>
+
+            {activeCategory === 'personal' ? (
+              <div className="personal-grid" role="list" aria-label="Interesses pessoais">
+                <div className="skill-card" role="listitem">
+                  <div className="skill-icon">🌱</div>
+                  <h3>Agronegócio</h3>
+                  <p>Imersão prática no setor através da Integra Rural — conversar com produtores, entender o campo de perto.</p>
+                </div>
+                <div className="skill-card" role="listitem">
+                  <div className="skill-icon">💡</div>
+                  <h3>Empreendedorismo</h3>
+                  <p>Gosto de construir coisas do zero — produtos, negócios, ideias que resolvem algo real.</p>
+                </div>
+                <div className="skill-card" role="listitem">
+                  <div className="skill-icon">📚</div>
+                  <h3>Leitura</h3>
+                  <p>Produto digital, tecnologia, negócios e biografias. Aprender com quem já trilhou o caminho.</p>
+                </div>
+                <div className="skill-card" role="listitem">
+                  <div className="skill-icon">📺</div>
+                  <h3>Animes & Séries</h3>
+                  <p>Maratonar boas histórias é o meu jeito favorito de desligar — de animes clássicos a séries do momento.</p>
+                </div>
+                <div className="skill-card" role="listitem">
+                  <div className="skill-icon">🎮</div>
+                  <h3>Games & Tech</h3>
+                  <p>Acompanhar lançamentos de tecnologia, jogos e cultura digital — entusiasta de longa data.</p>
+                </div>
+                <div className="skill-card" role="listitem">
+                  <div className="skill-icon">✈️</div>
+                  <h3>Viagens</h3>
+                  <p>Conhecer lugares, pessoas e perspectivas diferentes — combustível para criatividade.</p>
+                </div>
+              </div>
+            ) : (
+              <ProjectTabs
+                key={activeCategory}
+                projects={activeCategory === 'professional' ? professionalProjects : academicProjects}
+                ariaLabel={
+                  activeCategory === 'professional'
+                    ? 'Projetos profissionais'
+                    : 'Projetos acadêmicos da FATEC'
+                }
+              />
+            )}
           </div>
         </div>
       </section>
